@@ -8,6 +8,19 @@ class PersonForm extends StatefulWidget {
 class _PersonFormState extends State<PersonForm> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Formulário'),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.save),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          )
+        ],
+      ),
+    );
   }
 }
