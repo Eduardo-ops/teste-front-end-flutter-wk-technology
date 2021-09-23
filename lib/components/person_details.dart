@@ -5,10 +5,14 @@ import 'package:gerenciador_pessoas/utils/app_routes.dart';
 import 'package:provider/provider.dart';
 
 class PersonDetails extends StatelessWidget {
+  final Person person;
+  const PersonDetails({
+    Key key,
+    @required this.person,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    final Person person = Provider.of(context);
-
     return ListTile(
       title: Text(person.nome),
       subtitle: Text(person.dataNascimento),
@@ -20,7 +24,10 @@ class PersonDetails extends StatelessWidget {
               icon: Icon(Icons.edit),
               color: Colors.orange,
               onPressed: () {
-                Navigator.of(context).pushNamed(AppRoutes.PERSON_FORM);
+                Navigator.of(context).pushNamed(
+                  AppRoutes.PERSON_FORM,
+                  arguments: person,
+                );
               },
             ),
             IconButton(
@@ -34,15 +41,14 @@ class PersonDetails extends StatelessWidget {
                           content: Text('Tem certeza ?'),
                           actions: <Widget>[
                             FlatButton(
-                              child: Text('Não'),
+                                child: Text('Não'),
+                                onPressed: () => {
+                                      Navigator.of(context).pop(false),
+                                    }),
+                            FlatButton(
+                              child: Text('Sim'),
                               onPressed: () => {
-                                Navigator.of(context).pop(false),
-                                FlatButton(
-                                  child: Text('Sim'),
-                                  onPressed: () => {
-                                    Navigator.of(context).pop(true),
-                                  },
-                                )
+                                Navigator.of(context).pop(true),
                               },
                             )
                           ],

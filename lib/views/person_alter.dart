@@ -3,12 +3,12 @@ import 'package:gerenciador_pessoas/models/person.dart';
 import 'package:gerenciador_pessoas/models/person_list.dart';
 import 'package:provider/provider.dart';
 
-class PersonForm extends StatefulWidget {
+class PersonAltger extends StatefulWidget {
   @override
-  _PersonFormState createState() => _PersonFormState();
+  _PersonAltgerState createState() => _PersonAltgerState();
 }
 
-class _PersonFormState extends State<PersonForm> {
+class _PersonAltgerState extends State<PersonAltger> {
   final _form = GlobalKey<FormState>();
 
   final Map<String, String> _formData = {};
@@ -36,7 +36,7 @@ class _PersonFormState extends State<PersonForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Formulário'),
+        title: Text('Alteração de Dados'),
         centerTitle: true,
         actions: [
           IconButton(
@@ -46,7 +46,7 @@ class _PersonFormState extends State<PersonForm> {
               if (validator) {
                 _form.currentState.save();
                 Provider.of<PersonList>(context, listen: false)
-                    .createPerson(Person(
+                    .updatePerson(Person(
                   id: _formData['id'],
                   nome: _formData['nome'],
                   dataNascimento: _formData['dataNascimento'],
